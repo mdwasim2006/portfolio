@@ -374,3 +374,62 @@ body {
   opacity: 1 !important;
   transform: none !important;
 }
+
+
+
+/* =========================
+   CONTACT SECTION REDESIGN
+========================= */
+
+.contact {
+  text-align: center;
+}
+
+.contact-card {
+  max-width: 520px;
+  margin: 40px auto 0;
+  padding: 32px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid #222;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+}
+
+.contact-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #0b0b0b;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.25s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #aaa;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #fff;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+.full-btn {
+  width: 100%;
+  margin-top: 10px;
+}
