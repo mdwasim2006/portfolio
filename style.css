@@ -350,3 +350,27 @@ body {
   }
 
 }
+@media (max-width: 768px) {
+
+  .bg-animation,
+  .floating-dots {
+    animation: none;
+    opacity: 0.15;
+  }
+
+}
+@media (hover: none) {
+
+  .hero-img:hover,
+  .btn:hover,
+  .hero-socials a:hover,
+  .project-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+}
+.section {
+  opacity: 1 !important;
+  transform: none !important;
+}

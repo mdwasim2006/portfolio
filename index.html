@@ -240,7 +240,14 @@
 <!-- AOS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init({ duration: 1000, once: true });
+  AOS.init({
+  duration: 800,
+  once: true,
+  disable: function () {
+    return window.innerWidth < 768;
+  }
+});
+
 </script>
 
 </body>
