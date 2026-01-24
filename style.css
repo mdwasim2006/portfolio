@@ -285,17 +285,54 @@ html, body {
 /* =========================
    FINAL FOOTER
 ========================= */
+/* =========================
+   FOOTER FIX (LINK RESET)
+========================= */
+
 .final-footer {
-  padding: 80px 20px 50px;
   text-align: center;
-  border-top: 1px solid #1a1a1a;
+  padding: 80px 20px 50px;
+  background: #0b0b0b;
 }
 
+.footer-text {
+  max-width: 720px;
+  margin: 0 auto 28px;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Footer navigation links */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: #ffffff;
+  text-decoration: none;      /* 🔑 remove underline */
+  font-size: 15px;
+  opacity: 0.75;
+  transition: opacity 0.25s ease;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+}
+
+/* Social icons */
 .footer-socials-modern {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 22px;
-  margin: 30px 0;
+  margin-bottom: 34px;
 }
 
 .footer-socials-modern a {
@@ -306,33 +343,134 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #fff;
+  font-size: 18px;
   opacity: 0.75;
+  transition: all 0.3s ease;
 }
 
 .footer-socials-modern a:hover {
   opacity: 1;
   transform: translateY(-4px);
+  border-color: #fff;
+}
+
+/* Copyright line */
+.footer-copy {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+/* MOBILE FOOTER */
+@media (max-width: 768px) {
+
+  .footer-links {
+    gap: 18px;
+  }
+
+  .footer-text {
+    font-size: 14px;
+  }
+}
+
+
+/* =========================
+   PROJECT SECTION FIX
+========================= */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-top: 36px;
+  align-items: stretch;
+}
+
+.project-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid #222;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.55);
+}
+
+/* IMAGE SIZE CONTROL */
+.project-card img {
+  width: 100%;
+  height: 150px;              /* 🔑 reduced height */
+  object-fit: cover;
+}
+
+/* CONTENT CONTROL */
+.project-content {
+  padding: 18px 20px;         /* 🔑 tighter padding */
+}
+
+.project-content h3 {
+  font-size: 17px;            /* 🔑 smaller title */
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.project-content p {
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 1.5;
+}
+
+/* TAGS */
+.project-tags {
+  margin-top: 10px;
+}
+
+.project-tags span {
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 14px;
+  border: 1px solid #333;
+  margin-right: 6px;
+}
+
+/* LINKS */
+.project-links {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+}
+
+.project-links a {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 1px solid #444;
+  text-decoration: none;
+  color: #fff;
+  opacity: 0.85;
+}
+
+.project-links a:hover {
+  opacity: 1;
 }
 
 /* =========================
-   MOBILE FIX
+   MOBILE PROJECT FIX
 ========================= */
 @media (max-width: 768px) {
 
-  .navbar ul {
-    display: none;
-  }
-
-  .hero {
-    padding: 90px 16px 120px;
-  }
-
-  .skills-grid,
-  .about-cards {
+  .projects-grid {
     grid-template-columns: 1fr;
   }
 
-  .floating-dots {
-    opacity: 0.18;
+  .project-card img {
+    height: 160px;  /* slightly taller on mobile */
+  }
+
+  .project-content h3 {
+    font-size: 16px;
   }
 }
