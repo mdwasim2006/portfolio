@@ -1,8 +1,9 @@
 import { useState, type ElementType } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Mail, ArrowRight, Download } from 'lucide-react';
+import { Menu, X, Mail, Download } from 'lucide-react';
 import { Github, Linkedin } from './icons/BrandIcons';
 import { TextEffect } from './ui/text-effect';
+import ProfileCard from './reactbits/ProfileCard';
 
 export interface NavItem {
   label: string;
@@ -22,6 +23,8 @@ export interface MinimalistHeroProps {
   headingLines: [string, string];
   imageSrc: string;
   imageAlt: string;
+  projectsHref?: string;
+  projectsLabel?: string;
   readMoreHref?: string;
   readMoreLabel?: string;
   resumeHref?: string;
@@ -54,6 +57,8 @@ export function MinimalistHero({
   headingLines,
   imageSrc,
   imageAlt,
+  projectsHref = '#projects',
+  projectsLabel = 'View Projects',
   readMoreHref = '#about',
   readMoreLabel = 'Read More',
   resumeHref,
@@ -65,33 +70,36 @@ export function MinimalistHero({
   className = '',
 }: MinimalistHeroProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const primaryName = headingLines[0] || 'Mohamed Wasim';
+  const secondaryName = headingLines[1] || 'Software Developer';
 
   return (
     <section
       id="home"
+      data-section
       className={`relative min-h-screen overflow-hidden bg-transparent text-white ${className}`}
     >
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-5 pb-8 pt-5 sm:px-8 lg:px-10">
-        <header className="flex items-center justify-between border-b border-white/10 pb-5">
+        <header className="flex items-center justify-between pb-4">
           <motion.a
             href="#home"
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="text-xl font-semibold tracking-[0.22em]"
+            className="text-3xl font-extrabold tracking-[-0.03em]"
           >
-            <TextEffect as="span" per="char" preset="slide" className="inline-block">
+            <TextEffect as="span" per="word" preset="slide" className="inline-block">
               {logo}
             </TextEffect>
           </motion.a>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-9 md:flex">
             {navItems.map((item) => (
               <motion.a
                 key={item.label}
                 href={item.href}
                 whileHover={{ y: -2 }}
-                className="text-sm font-medium tracking-[0.18em] text-white/70 transition hover:text-white"
+                className="text-sm font-semibold tracking-wide text-white/80 transition hover:text-white"
               >
                 <TextEffect as="span" per="word" preset="fade" className="inline-block">
                   {item.label}
@@ -104,7 +112,7 @@ export function MinimalistHero({
             type="button"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] md:hidden"
             onClick={() => setMobileMenuOpen((open) => !open)}
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -136,111 +144,65 @@ export function MinimalistHero({
           ) : null}
         </AnimatePresence>
 
-        <div className="grid flex-1 items-center gap-14 py-10 md:grid-cols-3 md:gap-8 lg:gap-10">
+        <div className="grid flex-1 items-center gap-10 py-8 lg:grid-cols-[1.05fr_0.95fr]">
           <motion.div
-            initial={{ opacity: 0, x: -28 }}
+            initial={{ opacity: 0, x: -22 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="order-3 flex flex-col justify-end md:order-1 md:self-end"
+            transition={{ duration: 0.55, delay: 0.08 }}
+            className="order-2 lg:order-1"
           >
-            <TextEffect as="p" per="word" preset="fade" className="max-w-sm text-base leading-7 text-white/70 sm:text-lg">
+            <div className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-black/35 px-3 py-2 text-xs text-white/90">
+              <span className="inline-block h-2 w-2 rounded-full bg-indigo-400" />
+              <span className="font-medium">Design. Build. Ship.</span>
+            </div>
+
+            <h1 className="mt-5 max-w-[16ch] text-4xl font-extrabold leading-[0.95] tracking-[-0.04em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
+              <TextEffect as="span" per="word" preset="blur" className="block">
+                {primaryName}
+              </TextEffect>
+              <TextEffect as="span" per="word" preset="blur" className="block text-white/92">
+                {secondaryName}
+              </TextEffect>
+            </h1>
+
+            <div className="mt-4 inline-flex items-center rounded-full border border-amber-300/35 bg-amber-500/12 px-3 py-1.5 text-xs font-semibold text-amber-100">
+              <span aria-hidden="true" className="mr-2">🏆</span>
+              Hackathon Winner - Project X 2026
+            </div>
+
+            <TextEffect as="p" per="word" preset="fade" className="mt-6 max-w-xl text-base leading-8 text-white/75 sm:text-lg">
               {intro}
             </TextEffect>
-            <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <a
+                href={projectsHref}
+                className="inline-flex items-center gap-2 rounded-full border border-indigo-400/50 bg-indigo-500/85 px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500"
+              >
+                {projectsLabel}
+              </a>
+
               {resumeHref ? (
                 <a
                   href={resumeHref}
                   download={resumeFileName}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:border-indigo-400/60 hover:bg-indigo-500/10 sm:tracking-[0.2em]"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/35 px-5 py-3 text-sm font-semibold text-white transition hover:border-indigo-400/60 hover:bg-indigo-500/10"
                 >
                   <Download className="h-4 w-4" />
-                  <TextEffect as="span" per="word" preset="fade" className="inline-block">
-                    {resumeLabel}
-                  </TextEffect>
+                  {resumeLabel}
                 </a>
               ) : null}
 
               <a
                 href={readMoreHref}
-                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:translate-x-1 sm:tracking-[0.24em]"
+                className="inline-flex items-center gap-2 px-2 py-3 text-sm font-semibold text-white/80 transition hover:text-white"
               >
-                <TextEffect as="span" per="char" preset="slide" className="inline-block">
-                  {readMoreLabel}
-                </TextEffect>
-                <ArrowRight className="h-4 w-4" />
+                <span aria-hidden="true">→</span>
+                {readMoreLabel}
               </a>
             </div>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-            className="order-1 flex items-center justify-center md:order-2"
-          >
-            <div className="relative flex items-center justify-center">
-              <div
-                className={`absolute h-72 w-72 rounded-full ${accentClassName} opacity-20 blur-2xl sm:h-96 sm:w-96 lg:h-[28rem] lg:w-[28rem]`}
-              />
-              <div
-                className="absolute h-64 w-64 rounded-full border border-indigo-300/35 bg-indigo-500/15 shadow-[0_0_32px_rgba(99,102,241,0.35)] sm:h-80 sm:w-80 lg:h-[24rem] lg:w-[24rem]"
-              />
-              <motion.img
-                src={imageSrc}
-                alt={imageAlt}
-                initial={{ opacity: 0, scale: 0.84 }}
-                animate={{ opacity: 1, scale: 1.24 }}
-                transition={{ duration: 0.9, delay: 0.25, ease: 'easeOut' }}
-                className="relative z-10 h-56 w-56 rounded-full object-cover shadow-[0_18px_50px_rgba(0,0,0,0.12)] sm:h-64 sm:w-64 lg:h-72 lg:w-72"
-              />
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 28 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="relative z-20 order-2 flex flex-col items-start justify-center md:order-3 md:items-end md:pl-8 md:text-right lg:pl-10"
-          >
-            <h1 className="max-w-[12ch] text-5xl font-black uppercase leading-[0.9] tracking-[-0.08em] sm:text-7xl lg:text-[6.8rem] xl:text-[7.8rem]">
-              <TextEffect as="span" per="word" preset="blur" className="block">
-                {headingLines[0]}
-              </TextEffect>
-              <TextEffect as="span" per="word" preset="blur" className="block">
-                {headingLines[1]}
-              </TextEffect>
-            </h1>
-          </motion.div>
-        </div>
-
-        <footer className="relative pt-2">
-          <div className="hidden items-end justify-between md:flex">
-            <div className="flex items-center gap-5">
-              {socialLinks.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <motion.a
-                    key={item.label}
-                    href={item.href}
-                    target={item.href.startsWith('mailto:') ? undefined : '_blank'}
-                    rel={item.href.startsWith('mailto:') ? undefined : 'noreferrer'}
-                    whileHover={{ y: -3 }}
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white transition hover:border-white hover:bg-white hover:text-black"
-                    aria-label={item.label}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </motion.a>
-                );
-              })}
-            </div>
-
-            <TextEffect as="p" per="char" preset="fade" className="text-sm uppercase tracking-[0.3em] text-white/55">
-              {locationLabel}
-            </TextEffect>
-          </div>
-
-          <div className="mt-8 flex items-end justify-between md:hidden">
-            <div className="flex items-center gap-3">
+            <div className="mt-4 flex flex-wrap items-center gap-3">
               {socialLinks.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -249,19 +211,51 @@ export function MinimalistHero({
                     href={item.href}
                     target={item.href.startsWith('mailto:') ? undefined : '_blank'}
                     rel={item.href.startsWith('mailto:') ? undefined : 'noreferrer'}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/30 text-white transition hover:border-white/40"
                     aria-label={item.label}
                   >
                     <Icon className="h-4 w-4" />
                   </a>
                 );
               })}
+              <span className="ml-1 text-xs font-medium uppercase tracking-[0.15em] text-white/60">{locationLabel}</span>
             </div>
-            <TextEffect as="p" per="char" preset="fade" className="text-xs uppercase tracking-[0.28em] text-white/55">
-              {locationLabel}
-            </TextEffect>
-          </div>
-        </footer>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 24, y: 16 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.12 }}
+            className="order-1 flex justify-center lg:order-2 lg:justify-end"
+          >
+            <ProfileCard
+              avatarUrl={imageSrc}
+              name="Mohamed Wasim"
+              title="Software Developer"
+              handle="mdwasim2006"
+              status="Chennai, India"
+              contactText="Open to Internships"
+              showUserInfo={true}
+              enableTilt={true}
+              enableMobileTilt={false}
+              naturalTone={true}
+              onContactClick={() => {
+                const contactSection = document.querySelector('#contact');
+                if (contactSection instanceof HTMLElement) {
+                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                window.history.replaceState(null, '', '#contact');
+              }}
+              iconUrl=""
+              behindGlowEnabled={true}
+              behindGlowColor="rgba(255,255,255,0.16)"
+              behindGlowSize="42%"
+              innerGradient="linear-gradient(145deg,rgba(18,20,24,0.98) 0%,rgba(38,40,44,0.96) 100%)"
+              className="w-full max-w-[20rem] sm:max-w-[22rem]"
+            />
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );

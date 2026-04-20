@@ -55,6 +55,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
+      data-section
       ref={sectionRef}
       className="relative mt-8 overflow-hidden bg-transparent py-16 text-white md:mt-10 md:py-20"
     >
@@ -86,6 +87,7 @@ export function ContactSection() {
           {contacts.map((contact, index) => (
             <motion.div
               key={contact.title}
+              data-tilt
               initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
               whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}

@@ -6,17 +6,22 @@ import { MinimalistHero } from './components/MinimalistHero';
 import { ProjectsSection } from './components/ProjectsSection';
 import AnimatedBackgroundWrapper from './components/shared/AnimatedBackgroundWrapper';
 import { SkillsSection } from './components/SkillsSection';
+import { useCreativeMotion } from './hooks/useCreativeMotion';
 
 export default function App() {
+  useCreativeMotion();
+
   return (
     <div className="bg-black text-white">
       <main>
         <AnimatedBackgroundWrapper>
           <MinimalistHero
-            intro="Computer Science Engineering student building real-world software, automation systems, and secure applications."
-            headingLines={["build.", "impact."]}
+            intro="Focused on secure systems, automation platforms, and scalable web applications."
+            headingLines={["Full-Stack Developer", "Building secure & real-time systems"]}
             imageSrc="/my-photo.jpg"
             imageAlt="Portrait of Wasim"
+            projectsHref="#projects"
+            projectsLabel="View Projects"
             readMoreHref="#about"
             resumeHref="/resume/Mohamed_Wasim_Resume.pdf"
             resumeFileName="Mohamed_Wasim_Resume.pdf"

@@ -13,8 +13,8 @@ const AwardCard = React.forwardRef<HTMLDivElement, AwardCardProps>(
       <div
         ref={ref}
         className={cn(
-          'flex min-w-[240px] items-center gap-4 rounded-lg border border-white/12 bg-white/[0.03] p-4 shadow-sm backdrop-blur-md',
-          'transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-md',
+          'flex h-full min-w-[240px] items-center gap-4 rounded-lg border border-white/22 bg-[#070f1b]/58 p-4 shadow-[0_12px_26px_rgba(2,6,23,0.35)] backdrop-blur-2xl',
+          'transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-[0_16px_30px_rgba(2,6,23,0.48)]',
           className,
         )}
         {...props}

@@ -79,7 +79,7 @@ export default function AwardCardGridDemo() {
   return (
     <div className="w-full max-w-6xl p-1" aria-label="Skills and Capabilities">
       <motion.div
-        className="flex gap-4 overflow-x-auto pb-4 md:grid md:grid-cols-2 md:overflow-visible lg:grid-cols-3 xl:grid-cols-4"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4"
         role="list"
         variants={containerVariants}
         initial="hidden"
@@ -87,7 +87,7 @@ export default function AwardCardGridDemo() {
         viewport={{ once: true, amount: 0.25 }}
       >
         {skillsData.map((skill) => (
-          <motion.div key={`${skill.title}-${skill.description}`} variants={itemVariants} role="listitem">
+          <motion.div key={`${skill.title}-${skill.description}`} variants={itemVariants} role="listitem" className="h-full">
             <AwardCard
               icon={skill.icon}
               title={skill.title}

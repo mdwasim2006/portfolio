@@ -1,58 +1,67 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { ShieldCheck, Workflow, CalendarCheck2, FileLock2, type LucideIcon } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useState } from 'react';
 import { TextEffect } from './ui/text-effect';
-import { ServiceCard } from './ui/service-card';
+import { ArticleCard } from './ui/blog-post-card';
 
 interface ProjectItem {
   title: string;
+  stack: string;
   description: string;
-  imageSrc: string;
+  cover: string;
   imageAlt: string;
   link: string;
-  icon: LucideIcon;
 }
 
 const projects: ProjectItem[] = [
   {
     title: 'CrediChain – Credential Verification System',
+    stack: 'React • Node • MongoDB • SHA-256',
     description:
-      'A secure system for instant certificate verification using SHA-256 hashing and QR-based validation with tamper detection.',
-    imageSrc:
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80',
+      'Reduced manual verification effort using cryptographic validation and QR-based proof system.',
+    cover:
+      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1400&q=80',
     imageAlt: 'Blockchain and security technology visualization',
     link: 'https://github.com/mdwasim2006',
-    icon: ShieldCheck,
   },
   {
     title: 'FlowAI – Workflow Automation System',
+    stack: 'React • Node • MongoDB • Automation',
     description:
-      'A real-time workflow automation platform with approval pipelines, live tracking, and smart deadline management.',
-    imageSrc:
-      'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80',
+      'Streamlined task approvals and reduced coordination overhead with real-time workflow automation.',
+    cover:
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80',
     imageAlt: 'Workflow dashboard interface',
     link: 'https://github.com/mdwasim2006',
-    icon: Workflow,
   },
   {
     title: 'Secure File Sharing Platform',
+    stack: 'React • Node • Encryption • Cloud Storage',
     description:
-      'A secure web app for anonymous file sharing with encrypted links, expiry control, and real-time tracking.',
-    imageSrc:
-      'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80',
+      'Improved secure document exchange with encrypted links, expiry control, and traceable sharing.',
+    cover:
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80',
     imageAlt: 'Secure cloud infrastructure and file protection concept',
     link: 'https://github.com/mdwasim2006',
-    icon: FileLock2,
+  },
+  {
+    title: 'AI-Powered Fashion E-Commerce Platform',
+    stack: 'React.js • Tailwind CSS • Firebase • Framer Motion',
+    description:
+      'Built a personalized fashion shopping platform with AI Size & Fit recommendations, smart filtering, virtual try-on MVP, UGC gallery, and a frictionless checkout flow.',
+    cover:
+      'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80',
+    imageAlt: 'Modern fashion e-commerce shopping experience on digital devices',
+    link: 'https://github.com/mdwasim2006',
   },
   {
     title: 'Event Management System',
+    stack: 'React • Node • MongoDB • CSV Export',
     description:
-      'A web-based system for managing events, registrations, and admin workflows with CSV export functionality.',
-    imageSrc:
+      'Reduced event coordination effort with registration workflows, admin tooling, and CSV export.',
+    cover:
       'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1400&q=80',
     imageAlt: 'Event planning and management setup',
     link: 'https://github.com/mdwasim2006',
-    icon: CalendarCheck2,
   },
 ];
 
@@ -62,7 +71,7 @@ export function ProjectsSection() {
   const visibleProjects = showAllProjects ? projects : projects.slice(0, 3);
 
   return (
-    <section id="projects" className="relative mt-8 overflow-hidden bg-transparent py-16 text-white md:mt-10 md:py-20">
+    <section id="projects" data-section className="relative mt-8 overflow-hidden bg-transparent py-16 text-white md:mt-10 md:py-20">
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         <motion.div
           initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
@@ -80,27 +89,32 @@ export function ProjectsSection() {
           </TextEffect>
         </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {visibleProjects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
-              whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.22 }}
-              transition={{ duration: 0.65, delay: index * 0.08 }}
-            >
-              <ServiceCard
-                title={project.title}
-                href={project.link}
-                imgSrc={project.imageSrc}
-                imgAlt={project.imageAlt}
-                icon={<project.icon className="h-5 w-5" />}
-                variant="default"
-                className="mx-auto h-full w-full max-w-sm min-h-[20rem]"
-              />
-            </motion.div>
-          ))}
-        </div>
+        <motion.div layout className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout" initial={false}>
+            {visibleProjects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                layout
+                data-project-card
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 16, scale: 0.98 }}
+                animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+                exit={prefersReducedMotion ? undefined : { opacity: 0, y: 12, scale: 0.98 }}
+                transition={{ duration: 0.3, ease: 'easeOut', delay: index * 0.03 }}
+              >
+                <ArticleCard
+                  headline={project.title}
+                  excerpt={project.description}
+                  cover={project.cover}
+                  tag={project.stack}
+                  ctaHref={project.link}
+                  ctaLabel="View Project"
+                  clampLines={3}
+                  className="h-full max-w-none"
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {projects.length > 3 ? (
           <div className="mt-8 flex justify-center">

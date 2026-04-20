@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Sora:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,13 +14,36 @@ body,
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  background: #0b0b0b;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(56, 189, 248, 0.1), transparent 32%),
+    radial-gradient(circle at 82% 86%, rgba(148, 163, 184, 0.12), transparent 40%),
+    #04060a;
   color: #ffffff;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Sora', ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 * {
   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Manrope', 'Sora', ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tilt] {
+  perspective: 1000px;
+}
+
+[data-tilt-inner] {
+  transform-style: preserve-3d;
+  will-change: transform;
 }

@@ -6,7 +6,7 @@ export function SkillsSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="skills" className="relative mt-8 mx-auto max-w-6xl px-6 py-16 text-white md:mt-10 md:py-20">
+    <section id="skills" data-section className="relative mt-8 mx-auto max-w-6xl px-6 py-16 text-white md:mt-10 md:py-20">
       <div className="relative z-10">
       <motion.div
         initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
@@ -25,6 +25,7 @@ export function SkillsSection() {
       </motion.div>
 
       <motion.div
+        data-tilt
         initial={prefersReducedMotion ? false : { opacity: 0, y: 22 }}
         whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
